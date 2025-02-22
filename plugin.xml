@@ -45,6 +45,8 @@
         <pod name="MMLanScan" spec="~> 3.0.0" />
       </pods>
     </podspec>
+   <!-- MMLanScan -->
+    <header-file src="src/ios/MMLANScan-Bridging-Header.h" type="BridgingHeader"/>
 
     <config-file target="config.xml" parent="/*">
       <feature name="LocalDevices">
