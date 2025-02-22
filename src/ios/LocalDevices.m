@@ -1,4 +1,5 @@
 #import "LocalDevices.h"
+#import <MMLanScan/MMDevice.h> // Add explicit import for MMDevice
 
 @implementation LocalDevices
 
@@ -14,7 +15,7 @@
     
     // Get parameters
     NSNumber *timeout = command.arguments.count > 0 ? command.arguments[0] : @(0);
-    NSArray *deviceTypes = command.arguments.count > 1 ? command.arguments[1] : @[];
+    __unused NSArray *deviceTypes = command.arguments.count > 1 ? command.arguments[1] : @[]; // Mark as unused
     
     // Initialize scanner
     self.lanScanner = [[MMLANScanner alloc] initWithDelegate:self];
@@ -57,9 +58,9 @@
     [self.devices addObject:deviceInfo];
 }
 
-- (void)lanScanProgressPinged:(NSInteger)pingedHosts from:(NSInteger)overallHosts {
+- (void)lanScanProgressPinged:(float)pingedHosts from:(NSInteger)overallHosts {
     NSDictionary *progressData = @{
-        @"pinged": @(pingedHosts),
+        @"pinged": @((NSInteger)pingedHosts), // Cast float to NSInteger
         @"total": @(overallHosts)
     };
     
